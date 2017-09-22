@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Newton
 {
@@ -11,10 +7,19 @@ namespace Newton
     /// </summary>
     class Newtonfunction
     {
-
+        /// <summary>
+        /// root object
+        /// </summary>
         private Root root;
+
+        /// <summary>
+        /// value of the precision of the root calculation
+        /// </summary>
         private int precisionOfCalculation;
 
+        /// <summary>
+        /// Accessor to the value of the precision of the calculation
+        /// </summary>
         public int PrecisionOfCalculation
         {
             get
@@ -27,9 +32,15 @@ namespace Newton
             }
         }
 
-        private decimal possibleSolution;
+        /// <summary>
+        /// value of the possible solution of the calculation
+        /// </summary>
+        private float possibleSolution;
 
-        public decimal PossibleSolution
+        /// <summary>
+        /// Accessor of value of the possible solution of the calculation
+        /// </summary>
+        public float PossibleSolution
         {
             get
             {
@@ -41,8 +52,14 @@ namespace Newton
             }
         }
 
+        /// <summary>
+        /// value of the limit value of the root
+        /// </summary>
         private decimal limitValue;
 
+        /// <summary>
+        /// Accessor of the value if the value of the limit value
+        /// </summary>
         public decimal LimitValue
         {
             get
@@ -55,6 +72,9 @@ namespace Newton
             }
         }
 
+        /// <summary>
+        /// value of epsilon to decide if possible solution of calculation is precise enough
+        /// </summary>
         private double epsilon;
 
         /// <summary>
@@ -82,26 +102,34 @@ namespace Newton
         /// Shows the current data of the root
         /// </summary>
         /// <returns>Stringrepresentation of the root</returns>
-       public override string ToString()
+        public override string ToString()
         {
             return $"{root.OrderOfRoot} root of {root.Radicand} with decimalprecision of {precisionOfCalculation} and epsilon of {epsilon}";
         }
-       
 
-        private bool IsPreciseEnough(float PossibleSolution, float Epsilon)
+        /// <summary>
+        /// method to decide if possible solution of the root calculation is precise enough, based on epsilon
+        /// </summary>
+        /// <param name="PossibleSolution">possible solution of the root calculation</param>
+        /// <param name="Epsilon">value to decide if the possible solution is precise enough</param>
+        /// <returns>true, if possible solution is precise enough, else false</returns>
+        private bool IsPreciseEnough()
         {
-            if (root.Radicand - (PossibleSolution * PossibleSolution) < Epsilon) {
+            if (root.Radicand - (PossibleSolution * PossibleSolution) < epsilon)
+            {
                 return true;
             }
             return false;
         }
 
-        private float CalculatePossibleSolution()
+        /// <summary>
+        /// calculates the limit value of the root
+        /// </summary>
+        /// <returns>limit value of the root</returns>
+        private float CalculateLimitValue()
         {
 
-            float possibleSolution = (1 + root.Radicand) / 2;
-
-            return possibleSolution;
+            return (1 + root.Radicand) / 2;
         }
 
     }
