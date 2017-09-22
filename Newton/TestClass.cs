@@ -9,9 +9,9 @@ namespace Newton
     {
         public static void Main()
         {
-            Root root1 = new Root(2, 9);
-            Root root2 = new Newton.Root(4, 16);
-            Root root3 = new Newton.Root(4);
+            Root root1 = new Root(2, 2);
+            Root root2 = new Newton.Root(2, 3);
+            Root root3 = new Newton.Root(5);
             Root root4 = new Newton.Root(9);
 
             Newtonfunction newt1 = new Newtonfunction(root1);
@@ -31,7 +31,16 @@ namespace Newton
             Console.WriteLine("Root root4 = new Newton.Root(9);");
             Console.WriteLine(root4.ToString());
             Console.WriteLine(newt4.ToString());
-
+            Console.WriteLine("\n\nBerechnungen:\n");
+            Console.WriteLine(newt1.ToString() + "= ");
+            Console.WriteLine(newt1.CalculateRootSolutionIterative());
+            Console.WriteLine(newt1.PossibleSolution);
+            Console.WriteLine(newt2.ToString() + "= ");
+            Console.WriteLine(newt2.CalculateRootSolutionIterative());
+            Console.WriteLine(newt2.PossibleSolution);
+            Console.WriteLine(newt3.ToString() + "= ");
+            Console.WriteLine(newt3.CalculateRootSolutionIterative());
+            Console.WriteLine(newt3.PossibleSolution);
 
             Console.ReadKey();
         }

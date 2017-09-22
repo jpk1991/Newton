@@ -55,12 +55,12 @@ namespace Newton
         /// <summary>
         /// value of the limit value of the root
         /// </summary>
-        private decimal limitValue;
+        private float limitValue;
 
         /// <summary>
         /// Accessor of the value if the value of the limit value
         /// </summary>
-        public decimal LimitValue
+        public float LimitValue
         {
             get
             {
@@ -115,7 +115,7 @@ namespace Newton
         /// <returns>true, if possible solution is precise enough, else false</returns>
         private bool IsPreciseEnough()
         {
-            if (root.Radicand - (PossibleSolution * PossibleSolution) < epsilon)
+            if (Math.Abs(root.Radicand - (PossibleSolution * PossibleSolution)) < epsilon)
             {
                 return true;
             }
@@ -132,5 +132,17 @@ namespace Newton
             return (1 + root.Radicand) / 2;
         }
 
+        public  float CalculateRootSolutionIterative()
+        {
+            LimitValue = CalculateLimitValue();
+
+            PossibleSolution = LimitValue;
+
+            while (!IsPreciseEnough())
+            {
+                PossibleSolution = (PossibleSolution / 2) * (3 - ((PossibleSolution * PossibleSolution) / root.Radicand));
+            }
+            return PossibleSolution;
+        }
     }
 }
