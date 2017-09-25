@@ -113,7 +113,7 @@ namespace Newton
         /// <param name="PossibleSolution">possible solution of the root calculation</param>
         /// <param name="Epsilon">value to decide if the possible solution is precise enough</param>
         /// <returns>true, if possible solution is precise enough, else false</returns>
-        private bool IsPreciseEnough()
+        private bool IsPreciseEnough(float PossibleSolution)
         {
             if (Math.Abs(root.Radicand - (PossibleSolution * PossibleSolution)) < epsilon)
             {
@@ -132,17 +132,36 @@ namespace Newton
             return (1 + root.Radicand) / 2;
         }
 
+        /// <summary>
+        /// Iterative Implemention des Newtonverfahrens zur Wurzelberechnung
+        /// </summary>
+        /// <returns>Nach Newtonverfahren berechnete Wurzel</returns>
         public  float CalculateRootSolutionIterative()
         {
             LimitValue = CalculateLimitValue();
 
             PossibleSolution = LimitValue;
 
-            while (!IsPreciseEnough())
+            while (!IsPreciseEnough(PossibleSolution))
             {
                 PossibleSolution = (PossibleSolution / 2) * (3 - ((PossibleSolution * PossibleSolution) / root.Radicand));
             }
             return PossibleSolution;
+        }
+
+        /// <summary>
+        /// Rekursive Implementation des Newtonverfahrens zur Wurzelberechnung
+        /// </summary>
+        /// <param name="PossibleSolution">Mögliche Lösung </param>
+        /// <returns>Nach Newtonverfahren berechnete Wurzel</returns>
+        public float CalculateSolutionRecursive(float PossibleSolution)
+        {
+            if(IsPreciseEnough(PossibleSolution))
+            {
+                return PossibleSolution;
+            }
+
+            return CalculateSolutionRecursive((PossibleSolution / 2) * ((PossibleSolution * PossibleSolution) / root.Radicand));
         }
     }
 }
